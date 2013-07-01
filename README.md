@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fgimenez/vagrant-shell-commander.png)](https://travis-ci.org/fgimenez/vagrant-shell-commander)
+
 # Vagrant::Shell::Commander
 
 Vagrant plugin for executing arbitrary shell commands on guest
