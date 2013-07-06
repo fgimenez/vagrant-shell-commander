@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/fgimenez/vagrant-shell-commander.png)](https://travis-ci.org/fgimenez/vagrant-shell-commander)
+[![Code Climate](https://codeclimate.com/github/fgimenez/vagrant-shell-commander.png)](https://codeclimate.com/github/fgimenez/vagrant-shell-commander)
 
 # Vagrant::Shell::Commander
 
