@@ -11,9 +11,11 @@ describe VagrantShellCommander::Command do
 
   it 'has a vm option'
 
-  it 'execute the nil cwd by default'
+  it 'reports an error if the given vm is not defined'
 
-  it 'executes the command on every vm if vm option is missing'
+  it 'reports an error if none vm is running'
 
-  it 'exits gracefully when no command is given'
+  it 'executes the given command on every vm if vm option is missing'
+
+  it 'shows the help when no command is given'
 end
