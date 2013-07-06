@@ -5,12 +5,10 @@ module VagrantShellCommander
   #
   class Plugin < Vagrant.plugin("2")
     name 'vagrant shell commander'
-=begin
+
     command 'execute-shell-command' do
       require_relative 'vagrant-shell-commander/command'
       Command
     end
-=end
   end
-
 end
