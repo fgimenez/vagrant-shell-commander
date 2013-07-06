@@ -6,9 +6,10 @@ describe VagrantShellCommander::Plugin do
   end
 
   describe "main command" do
-    it 'should define a command' do
-      default_command = described_class.command.to_hash[:"execute-shell-command"]
-      expect(default_command).not_to be_nil
+    it "should define a command of type Command" do
+      default_command = described_class.command.
+        to_hash[:"execute-shell-command"]
+      expect(default_command).to be(VagrantShellCommander::Command)
     end
   end
 end
