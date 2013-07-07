@@ -8,14 +8,30 @@ describe VagrantShellCommander::Command do
       expect(subject.execute).to eql(0)
     end
     
-    describe "options" do
+    describe 'options' do
+      let(:option_parser) {double(:banner= => true)}
+
+      before(:each) do
+        OptionParser.stub(:new).
+          and_yield(option_parser)
+      end
+      
+      after(:each) do
+        subject.execute
+      end
+      
+      it 'displays a informing banner' do
+        option_parser.should_receive(:banner=)
+      end
+      
       it 'has a help option'
       
       it 'has a cwd option'
       
-      it 'has a command option'
+      it 'has a cmd option'
+
     end
-    
+
     describe 'error reporting' do
       it 'reports an error if the given vm is not defined'
       
