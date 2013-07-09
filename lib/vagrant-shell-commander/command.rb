@@ -7,6 +7,13 @@ module VagrantShellCommander
       
       return unless argv
       
+      with_target_vms(argv) do |machine|
+        if machine.state.id != :running
+          env.ui.info("Machine #{machine.name} is not running.")
+          #next
+        end
+      end
+
       0
     end
 
