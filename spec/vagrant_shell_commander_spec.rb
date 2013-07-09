@@ -7,7 +7,7 @@ describe VagrantShellCommander::Plugin do
 
   it "should define a command of type Command" do
     default_command = described_class.command.
-      to_hash[:"execute-shell-command"]
+      to_hash[:"sh"]
     expect(default_command).to be(VagrantShellCommander::Command)
   end
 end

@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe VagrantShellCommander::Command do
   let(:subject) {described_class.new('2', 'command')}
-  
+  let(:argv) {double()}
+
   before(:each) do
-    subject.stub(:parse_options).and_return(true)
+    subject.stub(:parse_options).and_return(argv)
   end
 
   describe '#execute' do
@@ -13,34 +14,24 @@ describe VagrantShellCommander::Command do
     end
     
     describe 'options' do
-      let(:option_parser) {double(:banner= => true, separator: true)}
-
-      before(:each) do
-        OptionParser.stub(:new).
-          and_yield(option_parser)
-
-        subject.stub(:parse_options).and_return(true)
-      end
-      
       after(:each) do
         subject.execute
       end
-      
-      it 'displays a informing banner' do
-        option_parser.should_receive(:banner=)
-      end
-      
-      it 'has a cwd option'
-      
-      it 'has a cmd option'
 
       it 'parses the given options' do
-        opts = double()
-        OptionParser.stub(:new).and_return(opts)
-
-        subject.should_receive(:parse_options).with(opts)
+        opts = {parser: 'parser', values: 'values'}
+        VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+          and_return(opts)
+        
+        subject.should_receive(:parse_options).with(opts[:parser])
       end
-
+      
+      it 'returns on option parsing failure' do
+        subject.stub(:parse_options).and_return(false)
+        
+        expect(subject.execute).to eql(nil)
+      end
+      
     end
 
     describe 'error reporting' do

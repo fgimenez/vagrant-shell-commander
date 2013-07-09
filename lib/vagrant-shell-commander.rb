@@ -6,7 +6,7 @@ module VagrantShellCommander
   class Plugin < Vagrant.plugin("2")
     name 'vagrant shell commander'
 
-    command 'execute-shell-command' do
+    command 'sh' do
       require_relative 'vagrant-shell-commander/command'
       Command
     end
