@@ -10,13 +10,15 @@ module VagrantShellCommander
       with_target_vms(argv) do |machine|
         if machine.state.id != :running
           env.ui.info("Machine #{machine.name} is not running.")
-          #next
+          next
+        end
+
+        machine.communicate.execute(cli_options[:values][:cmd]) do |type, data|
+          #env.ui.info(data)
         end
       end
 
       0
     end
-
-    private
   end
 end

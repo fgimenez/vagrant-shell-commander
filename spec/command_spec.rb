@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe VagrantShellCommander::Command do
   let(:subject) {described_class.new('2', 'command')}
-  let(:argv) {double()}
+  let(:argv) {double}
   let(:opts) {{parser: 'parser', values: 'values'}}
 
   before(:each) do
@@ -36,33 +36,53 @@ describe VagrantShellCommander::Command do
     end
 
     describe 'command execution' do
+      let(:machine) {double}
+      let(:ui) {double(info: true)}
+      let(:env) {double(ui: ui)}
+
+      before(:each) do
+        subject.stub(:with_target_vms).and_yield(machine)
+        subject.stub(:env).and_return env
+      end
+
+      after(:each) do
+        subject.execute
+      end
+      
       context 'not running machine' do
-        let(:machine) {double}
-        let(:ui) {double(info: true)}
-        let(:env) {double(ui: ui)}
+        let(:machine_name) {'machine_name'}
 
         before(:each) do
-          subject.stub(:with_target_vms).and_yield(machine)
-          subject.stub(:env).and_return env
-        end
-
-        after(:each) do
-          subject.execute
+          machine.stub_chain(:state, :id).and_return(:not_running)
+          machine.stub(:name).and_return(machine_name)
         end
 
         it 'reports information about state' do
-          machine_name = 'machine_name'
-          machine.stub_chain(:state, :id).and_return(:not_running)
-          machine.stub(:name).and_return(machine_name)
-                    
           ui.should_receive(:info).with("Machine #{machine_name} is not running.")
         end
 
-        it 'dows not try to execute the command'
+        it 'dows not try to execute the command' do
+          machine.should_not_receive(:communicate)
+        end
       end
 
       context 'running machine' do
-        it 'executes the given command if the machine'
+        let(:cmd) {'command'}
+        let(:communicate) {double(execute: true)}
+        
+        before(:each) do
+          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            and_return(parser: 'parser', values: {cmd: cmd})
+
+          machine.stub_chain(:state, :id).and_return(:running)
+          machine.stub(:communicate).and_return(communicate)
+        end
+
+        it 'executes the given command' do
+          communicate.should_receive(:execute).with(cmd)
+        end
+
+        it 'shows the command output'
       
         it 'executes the given command on every vm if vm option is missing'
         
