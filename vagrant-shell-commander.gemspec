@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = VagrantShellCommander::VERSION
   spec.authors       = ["Federico Gimenez Nieto"]
   spec.email         = ["federico.gimenez@gmail.com"]
-  spec.description   = %q{Vagrant plugin for executing arbitrary shell commands on guest}
-  spec.summary       = %q{Vagrant plugin for executing arbitrary shell commands on guest}
-  spec.homepage      = ""
+  spec.description   = %q{This Vagrant plugin allows you to execute a given shell command on all the machines of your multinode environment. You can aldo specify the working directory to execute the command}
+  spec.summary       = %q{Vagrant plugin for executing arbitrary shell commands on guest(s)}
+  spec.homepage      = "https://github.com/fgimenez/vagrant-shell-commander"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
