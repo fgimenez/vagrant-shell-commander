@@ -39,10 +39,12 @@ describe VagrantShellCommander::Command do
       let(:machine) {double}
       let(:ui) {double(info: true)}
       let(:env) {double(ui: ui)}
+      let(:machine_name) {'machine_name'}
 
       before(:each) do
         subject.stub(:with_target_vms).and_yield(machine)
         subject.stub(:env).and_return env
+        machine.stub(:name).and_return(machine_name)
       end
 
       after(:each) do
@@ -50,11 +52,8 @@ describe VagrantShellCommander::Command do
       end
       
       context 'not running machine' do
-        let(:machine_name) {'machine_name'}
-
         before(:each) do
           machine.stub_chain(:state, :id).and_return(:not_running)
-          machine.stub(:name).and_return(machine_name)
         end
 
         it 'reports information about state' do
@@ -82,8 +81,14 @@ describe VagrantShellCommander::Command do
           communicate.should_receive(:execute).with(cmd)
         end
 
-        it 'shows the command output'
-      
+        it 'shows the command output along with the machine name' do
+          data = 'data'
+
+          communicate.stub(:execute).and_yield('type', data)
+
+          ui.should_receive(:info).with("#{machine_name}:: data")
+        end
+
         it 'executes the given command on every vm if vm option is missing'
         
         it 'shows the help when no command is given'
