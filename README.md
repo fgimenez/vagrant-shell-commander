@@ -7,7 +7,7 @@ Vagrant plugin for executing arbitrary shell commands on guest. Executes the giv
 
 ## Installation
 
-Install it yourself as:
+Install it as a vagrant plugin:
 
     $ vagrant plugin install vagrant-shell-commander
 
