@@ -86,12 +86,21 @@ describe VagrantShellCommander::Command do
 
           communicate.stub(:execute).and_yield('type', data)
 
-          ui.should_receive(:info).with("#{machine_name}:: data")
+          ui.should_receive(:info).with("#{machine_name}:: #{data}")
         end
 
-        it 'executes the given command on every vm if vm option is missing'
-        
-        it 'shows the help when no command is given'
+        it 'executes the command in the given cwd' do
+          cwd = 'cwd'
+
+          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            and_return(parser: 'parser', values: {cmd: cmd, cwd: cwd})
+          
+          communicate.should_receive(:execute).with("cd #{cwd} && #{cmd}")
+        end
+
+        it 'shows the help when no command is given' do
+          
+        end
       end
     end
   end
