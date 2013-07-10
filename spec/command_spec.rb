@@ -98,9 +98,6 @@ describe VagrantShellCommander::Command do
           communicate.should_receive(:execute).with("cd #{cwd} && #{cmd}")
         end
 
-        it 'shows the help when no command is given' do
-          
-        end
       end
     end
   end

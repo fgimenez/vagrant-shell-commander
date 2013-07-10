@@ -1,4 +1,5 @@
 require "vagrant-shell-commander/version"
+require "vagrant-shell-commander/option_manager"
 
 module VagrantShellCommander
   # Plugin definition
