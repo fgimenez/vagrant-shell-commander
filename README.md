@@ -3,25 +3,27 @@
 
 # Vagrant::Shell::Commander
 
-Vagrant plugin for executing arbitrary shell commands on guest
+Vagrant plugin for executing arbitrary shell commands on guest. Executes the given command on all the machines on multinode environments. It also gives the option to specify a working directory.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install it yourself as:
 
-    gem 'vagrant-shell-commander'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install vagrant-shell-commander
+    $ vagrant plugin install vagrant-shell-commander
 
 ## Usage
 
-TODO: Write usage instructions here
+To execute a command on all the machines:
+
+    $ vagrant sh --cmd 'free'
+
+Restrict the machine to run:
+
+    $ vagrant sh --cmd 'free' machine1
+
+Add working directory:
+
+    $ vagrant sh --cmd 'ls -al' --cwd '/srv/www'
 
 ## Contributing
 
