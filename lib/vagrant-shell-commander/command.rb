@@ -11,10 +11,11 @@ module VagrantShellCommander
       
       return unless argv
       
-      with_target_vms(argv) do |machine|
-        manage_machine(machine, cli_options) 
+      unless [nil, ''].include? cli_options[:values][:cmd]
+        with_target_vms(argv) do |machine|
+          manage_machine(machine, cli_options) 
+        end
       end
-
       0
     end
 

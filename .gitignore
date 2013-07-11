@@ -17,3 +17,4 @@ tmp
 .ruby-*
 *~
 .vagrant
+*gem

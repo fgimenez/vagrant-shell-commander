@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VagrantShellCommander::Command do
   let(:subject) {described_class.new('2', 'command')}
   let(:argv) {double}
-  let(:opts) {{parser: 'parser', values: 'values'}}
+  let(:opts) {{parser: 'parser', values: {cmd: 'cmd'}}}
 
   before(:each) do
     VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
@@ -67,6 +67,7 @@ describe VagrantShellCommander::Command do
 
       context 'running machine' do
         let(:cmd) {'command'}
+        let(:cwd) {'cwd'}
         let(:communicate) {double(execute: true)}
         
         before(:each) do
@@ -90,14 +91,27 @@ describe VagrantShellCommander::Command do
         end
 
         it 'executes the command in the given cwd' do
-          cwd = 'cwd'
-
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, cwd: cwd})
           
           communicate.should_receive(:execute).with("cd #{cwd} && #{cmd}")
         end
 
+        describe 'does nothing' do
+          after(:each) do
+            subject.should_not_receive(:with_target_vms)
+          end
+
+          it 'an empty command' do
+            VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+              and_return(parser: 'parser', values: {cmd: '', cwd: cwd})
+          end
+
+          it 'non present command' do
+            VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+              and_return(parser: 'parser', values: {cwd: cwd})
+          end
+        end
       end
     end
   end
