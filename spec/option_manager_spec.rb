@@ -26,17 +26,17 @@ describe VagrantShellCommander::OptionManager do
       subject.execute
     end
     
-    it 'has a cwd option' do
-      cwd_value = 'cwd'
+    it 'has a dir option' do
+      dir_value = 'dir'
       
-      option_parser.stub(:on).with('--cwd [DIR]', 
+      option_parser.stub(:on).with('--dir [DIR]', 
                                    anything, 
                                    anything).
-        and_yield(cwd_value)
+        and_yield(dir_value)
 
       result = subject.execute
 
-      expect(result[:values][:cwd]).to eql(cwd_value)
+      expect(result[:values][:dir]).to eql(dir_value)
     end
     
     it 'has a cmd option' do

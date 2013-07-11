@@ -9,13 +9,13 @@ module VagrantShellCommander
     def execute
       options = {}
       block = lambda do |parser|
-        parser.banner = "Usage: vagrant sh --cmd 'COMMAND' --cwd [DIR] [MACHINE]"
+        parser.banner = "Usage: vagrant sh --cmd 'COMMAND' --dir [DIR] [MACHINE]"
 
         parser.separator ''
 
-        parser.on('--cwd [DIR]', '--change-working-dir [DIR]', 
-                  'Directory to execute the command') do |cwd|
-          options[:cwd] = cwd
+        parser.on('--dir [DIR]', '--change-working-dir [DIR]', 
+                  'Directory to execute the command') do |dir|
+          options[:dir] = dir
         end
 
         parser.on("--cmd 'COMMAND'", "--command 'COMMAND'", 
