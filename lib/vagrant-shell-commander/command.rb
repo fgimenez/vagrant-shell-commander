@@ -35,8 +35,9 @@ module VagrantShellCommander
       
       machine.communicate.
         execute(add_cwd_to_command(cli_options[:values][:cmd], 
-                                   cli_options[:values][:cwd])) do |type, data|
-        env.ui.info("#{machine.name}:: #{data}")
+                                   cli_options[:values][:dir])) do |type, data|
+        env.ui.success("#{machine.name}::")
+        env.ui.info(data)
       end
     end
 

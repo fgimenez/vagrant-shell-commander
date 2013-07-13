@@ -67,7 +67,7 @@ describe VagrantShellCommander::Command do
 
       context 'running machine' do
         let(:cmd) {'command'}
-        let(:cwd) {'cwd'}
+        let(:dir) {'dir'}
         let(:communicate) {double(execute: true)}
         
         before(:each) do
@@ -87,14 +87,15 @@ describe VagrantShellCommander::Command do
 
           communicate.stub(:execute).and_yield('type', data)
 
-          ui.should_receive(:info).with("#{machine_name}:: #{data}")
+          ui.should_receive(:success).with("#{machine_name}::")
+          ui.should_receive(:info).with(data)
         end
 
-        it 'executes the command in the given cwd' do
+        it 'executes the command in the given dir' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-            and_return(parser: 'parser', values: {cmd: cmd, cwd: cwd})
+            and_return(parser: 'parser', values: {cmd: cmd, dir: dir})
           
-          communicate.should_receive(:execute).with("cd #{cwd} && #{cmd}")
+          communicate.should_receive(:execute).with("cd #{dir} && #{cmd}")
         end
 
         describe 'does nothing' do
@@ -104,12 +105,12 @@ describe VagrantShellCommander::Command do
 
           it 'an empty command' do
             VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-              and_return(parser: 'parser', values: {cmd: '', cwd: cwd})
+              and_return(parser: 'parser', values: {cmd: '', dir: dir})
           end
 
           it 'non present command' do
             VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-              and_return(parser: 'parser', values: {cwd: cwd})
+              and_return(parser: 'parser', values: {dir: dir})
           end
         end
       end

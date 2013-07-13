@@ -13,7 +13,7 @@ GIT
 PATH
   remote: .
   specs:
-    vagrant-shell-commander (0.1.1)
+    vagrant-shell-commander (0.1.2)
 
 GEM
   remote: https://rubygems.org/
