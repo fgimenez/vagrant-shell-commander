@@ -15,15 +15,15 @@ As usual with vagrant plugins:
 
 To execute a command on all the machines:
 
-    $ vagrant sh --cmd 'free'
+    $ vagrant sh -c 'free'
 
 Restrict the machine to run:
 
-    $ vagrant sh --cmd 'free' machine1
+    $ vagrant sh -c 'free' machine1
 
 Specify the working directory:
 
-    $ vagrant sh --cmd 'ls -al' --dir '/srv/www'
+    $ vagrant sh -c 'ls -al' -d '/srv/www'
 
 Get help:
 
