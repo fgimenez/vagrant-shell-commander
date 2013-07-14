@@ -29,7 +29,7 @@ describe VagrantShellCommander::OptionManager do
     it 'has a dir option' do
       dir_value = 'dir'
       
-      option_parser.stub(:on).with('--dir [DIR]', 
+      option_parser.stub(:on).with('-d [DIR]', 
                                    anything, 
                                    anything).
         and_yield(dir_value)
@@ -42,7 +42,7 @@ describe VagrantShellCommander::OptionManager do
     it 'has a cmd option' do
       cmd_value = 'cmd'
       
-      option_parser.stub(:on).with("--cmd 'COMMAND'", 
+      option_parser.stub(:on).with("-c 'COMMAND'", 
                                    anything, 
                                    anything).
         and_yield(cmd_value)
