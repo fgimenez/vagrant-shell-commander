@@ -11,7 +11,9 @@ module VagrantShellCommander
       
       return unless argv
       
-      unless [nil, ''].include? cli_options[:values][:cmd]
+      if [nil, ''].include? cli_options[:values][:cmd]
+        env.ui.info cli_options[:parser]
+      else
         with_target_vms(argv) do |machine|
           manage_machine(machine, cli_options) 
         end
@@ -20,6 +22,8 @@ module VagrantShellCommander
     end
 
     private
+
+    
 
     # Executes actions for a given machine
     #

@@ -37,7 +37,7 @@ describe VagrantShellCommander::Command do
 
     describe 'command execution' do
       let(:machine) {double}
-      let(:ui) {double(info: true)}
+      let(:ui) {double(info: true, warn: true)}
       let(:env) {double(ui: ui)}
       let(:machine_name) {'machine_name'}
 
@@ -98,19 +98,22 @@ describe VagrantShellCommander::Command do
           communicate.should_receive(:execute).with("cd #{dir} && #{cmd}")
         end
 
-        describe 'does nothing' do
+        describe 'shows help' do
+          let(:parser) {'parser'}
+
           after(:each) do
             subject.should_not_receive(:with_target_vms)
+            ui.should_receive(:info).with(parser)
           end
 
           it 'an empty command' do
             VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-              and_return(parser: 'parser', values: {cmd: '', dir: dir})
+              and_return(parser: parser, values: {cmd: '', dir: dir})
           end
 
           it 'non present command' do
             VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-              and_return(parser: 'parser', values: {dir: dir})
+              and_return(parser: parser, values: {dir: dir})
           end
         end
       end
