@@ -29,7 +29,7 @@ module VagrantShellCommander
     #
     def manage_machine(machine, cli_options)
       if machine.state.id != :running
-        env.ui.info("Machine #{machine.name} is not running.")
+        env.ui.warn("Machine #{machine.name} is not running.")
         return
       end
       

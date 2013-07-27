@@ -57,7 +57,7 @@ describe VagrantShellCommander::Command do
         end
 
         it 'reports information about state' do
-          ui.should_receive(:info).with("Machine #{machine_name} is not running.")
+          ui.should_receive(:warn).with("Machine #{machine_name} is not running.")
         end
 
         it 'dows not try to execute the command' do

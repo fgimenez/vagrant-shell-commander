@@ -15,11 +15,11 @@ As usual with vagrant plugins:
 
 To execute a command on all the machines:
 
-    $ vagrant sh -c 'free'
+    $ vagrant sh -c free
 
 Restrict the machine to run:
 
-    $ vagrant sh -c 'free' machine1
+    $ vagrant sh -c free machine1
 
 Specify the working directory:
 
