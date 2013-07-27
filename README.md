@@ -21,9 +21,9 @@ Restrict the machine to run:
 
     $ vagrant sh -c free machine1
 
-Specify the working directory:
+Specify the working directory (remember to quote multiword commands):
 
-    $ vagrant sh -c 'ls -al' -d '/srv/www'
+    $ vagrant sh -c 'ls -al' -d /srv/www
 
 Get help:
 

@@ -19,7 +19,7 @@ module VagrantShellCommander
         end
 
         parser.on("-c 'COMMAND'", "--command 'COMMAND'", 
-                  'Command to execute') do |cmd|
+                  'Command to execute, quotes required for multiword') do |cmd|
           options[:cmd] = cmd
         end
       end
