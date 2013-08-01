@@ -10,6 +10,16 @@ Vagrant plugin for executing arbitrary shell commands on guest. Executes the giv
 As usual with vagrant plugins:
 
     $ vagrant plugin install vagrant-shell-commander
+    
+or with the great Bindler, after adding a plugins.json with, at least:
+
+    {
+      "vagrant-shell-commander"
+    }
+
+execute:
+
+    $ vagrant plugin bundle
 
 ## Usage
 
