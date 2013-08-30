@@ -3,7 +3,7 @@
 
 # Vagrant::Shell::Commander
 
-Vagrant plugin for executing arbitrary shell commands on guest. Executes the given command on all the machines on multinode environments. It also gives the option to specify a working directory.
+Vagrant plugin for executing arbitrary shell commands on guest(s). Executes the given command on all the machines of multinode environments, or just in one of them. It also gives the option to specify a working directory.
 
 ## Installation
 
