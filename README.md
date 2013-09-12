@@ -5,7 +5,7 @@
 
 Vagrant plugin for executing arbitrary shell commands on guest(s). Executes the given command on all the machines of multinode environments, or just in one of them. It also gives the option to specify a working directory.
 
-It is much like docker's run command, and can be handy for executing test suites in the guest's environment, for example.
+It is much like docker's run command, and can be handy if you need to run test suites in the isolated guest's environment, for example.
 
 ## Installation
 
