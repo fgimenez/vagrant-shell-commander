@@ -3,9 +3,10 @@
 
 # Vagrant::Shell::Commander
 
-Vagrant plugin for running arbitrary shell commands on guest(s). Executes the given command on all the machines of multinode environments, or just in one of them. It also gives the option to specify a working directory.
+Vagrant plugin for running arbitrary shell commands on guest(s). Executes the given command on all the machines of multinode environments, or just in one of them. It also gives the option to specify a working directory and a user by command line.
 
-It is similar to docker's run command, and can be handy if you need to run test suites in the isolated guest's environment, for example.
+It allows you to hook into the boot process, specifying a command to be run once the machine has booted. This can be handy for running init scripts which depends on files located in shared folders, for example.
+
 
 ## Installation
 

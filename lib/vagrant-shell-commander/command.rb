@@ -23,8 +23,6 @@ module VagrantShellCommander
 
     private
 
-    
-
     # Executes actions for a given machine
     #
     # @param [Vagrant::Machine] subject vm 
@@ -39,7 +37,8 @@ module VagrantShellCommander
       
       machine.communicate.
         execute(add_cwd_to_command(cli_options[:values][:cmd], 
-                                   cli_options[:values][:dir])) do |type, data|
+                                   cli_options[:values][:dir],
+                                   cli_options[:values][:user])) do |type, data|
         env.ui.success("#{machine.name}::")
         env.ui.info(data)
       end
@@ -49,11 +48,13 @@ module VagrantShellCommander
     #
     # @param cmd [String] Shell command
     # @param cwd [String] Optional working directory
-    # @return [String] Command with directory change if cwd is present
+    # @param cwd [String] Optional executing user
+    # @return [String] Command with directory change if cwd is present and optional executing user
     #
-    def add_cwd_to_command(cmd, cwd=nil)
-      return cmd unless cwd
-      "cd #{cwd} && #{cmd}"
+    def add_cwd_to_command(cmd, cwd=nil, user=nil)
+      cmd = "cd #{cwd} && #{cmd}" if cwd
+      cmd = "sudo su - #{user} -c \"#{cmd}\"" if user
+      cmd
     end
   end
 end

@@ -51,5 +51,19 @@ describe VagrantShellCommander::OptionManager do
 
       expect(result[:values][:cmd]).to eql(cmd_value)
     end
+
+    it 'has a user option' do
+      user_value = 'user'
+      
+      option_parser.stub(:on).with('-u [USER]', 
+                                   anything, 
+                                   anything).
+        and_yield(user_value)
+
+      result = subject.execute
+
+      expect(result[:values][:user]).to eql(user_value)
+    end
+
   end
 end

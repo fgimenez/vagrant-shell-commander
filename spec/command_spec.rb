@@ -68,6 +68,7 @@ describe VagrantShellCommander::Command do
       context 'running machine' do
         let(:cmd) {'command'}
         let(:dir) {'dir'}
+        let(:user) {'user'}
         let(:communicate) {double(execute: true)}
         
         before(:each) do
@@ -98,6 +99,20 @@ describe VagrantShellCommander::Command do
           communicate.should_receive(:execute).with("cd #{dir} && #{cmd}")
         end
 
+        it 'executes the command for the given user' do
+          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            and_return(parser: 'parser', values: {cmd: cmd, user: user})
+          
+          communicate.should_receive(:execute).with("sudo su - #{user} -c \"#{cmd}\"")
+        end
+
+        it 'executes the command for the given user and the given dir' do
+          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            and_return(parser: 'parser', values: {cmd: cmd, user: user, dir: dir})
+          
+          communicate.should_receive(:execute).with("sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
+        end
+
         describe 'shows help' do
           let(:parser) {'parser'}
 
@@ -113,7 +128,7 @@ describe VagrantShellCommander::Command do
 
           it 'non present command' do
             VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
-              and_return(parser: parser, values: {dir: dir})
+              and_return(parser: parser, values: {user: user})
           end
         end
       end

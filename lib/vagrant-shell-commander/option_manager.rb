@@ -18,6 +18,11 @@ module VagrantShellCommander
           options[:dir] = dir
         end
 
+        parser.on('-u [USER]', '--user [USER]', 
+                  'User to execute the command') do |user|
+          options[:user] = user
+        end
+
         parser.on("-c 'COMMAND'", "--command 'COMMAND'", 
                   'Command to execute, quotes required for multiword') do |cmd|
           options[:cmd] = cmd
