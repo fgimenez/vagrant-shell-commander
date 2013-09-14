@@ -10,4 +10,10 @@ describe VagrantShellCommander::Plugin do
       to_hash[:"sh"]
     expect(default_command).to be(VagrantShellCommander::Command)
   end
+
+  it "should define a config of type Config" do
+    default_config = described_class.components.configs[:top].to_hash[:"sh"]
+    expect(default_config).to be(VagrantShellCommander::Config)
+  end
+
 end

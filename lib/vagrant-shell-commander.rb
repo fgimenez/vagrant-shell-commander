@@ -11,5 +11,10 @@ module VagrantShellCommander
       require_relative 'vagrant-shell-commander/command'
       Command
     end
+
+    config 'sh' do
+      require_relative 'vagrant-shell-commander/config'
+      Config
+    end
   end
 end
