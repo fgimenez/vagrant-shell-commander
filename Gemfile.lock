@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mitchellh/vagrant.git
-  revision: e1e57024dc78565b99b8f2ccdd9c388270bf2de0
+  revision: 4638a7a0dff2a242ae583e045c56f6ce49191a4e
   specs:
-    vagrant (1.2.3.dev)
+    vagrant (1.3.2.dev)
       childprocess (~> 0.3.7)
       erubis (~> 2.7.0)
       i18n (~> 0.6.0)
@@ -25,12 +25,12 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     ffi (1.9.0)
-    i18n (0.6.4)
+    i18n (0.6.5)
     log4r (1.1.10)
     multi_json (1.7.7)
-    net-scp (1.1.1)
+    net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.6.7)
+    net-ssh (2.6.8)
     parallel (0.7.1)
     rake (10.1.0)
     reek (1.3.1)
