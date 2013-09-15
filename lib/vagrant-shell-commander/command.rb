@@ -40,7 +40,7 @@ module VagrantShellCommander
                                    cli_options[:values][:dir],
                                    cli_options[:values][:user])) do |type, data|
         env.ui.success("#{machine.name}::")
-        env.ui.info(data)
+        env.ui.info(data, prefix: false, new_line: false)
       end
     end
 

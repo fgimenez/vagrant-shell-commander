@@ -57,11 +57,11 @@ describe VagrantShellCommander::Command do
         end
 
         it 'reports information about state' do
-          ui.should_receive(:warn).with("Machine #{machine_name} is not running.")
+          expect(ui).to receive(:warn).with("Machine #{machine_name} is not running.")
         end
 
         it 'dows not try to execute the command' do
-          machine.should_not_receive(:communicate)
+          expect(machine).not_to receive(:communicate)
         end
       end
 
@@ -76,49 +76,51 @@ describe VagrantShellCommander::Command do
             and_return(parser: 'parser', values: {cmd: cmd})
 
           machine.stub_chain(:state, :id).and_return(:running)
-          machine.stub(:communicate).and_return(communicate)
+          allow(machine).to receive(:communicate).and_return(communicate)
         end
 
         it 'executes the given command' do
-          communicate.should_receive(:execute).with(cmd)
+          expect(communicate).to receive(:execute).with(cmd)
         end
 
         it 'shows the command output along with the machine name' do
           data = 'data'
 
-          communicate.stub(:execute).and_yield('type', data)
+          allow(communicate).to receive(:execute).and_yield('type', data)
 
-          ui.should_receive(:success).with("#{machine_name}::")
-          ui.should_receive(:info).with(data)
+          expect(ui).to receive(:success).with("#{machine_name}::")
+          expect(ui).to receive(:info).with(data, 
+                                            prefix: false,
+                                            new_line: false)
         end
 
         it 'executes the command in the given dir' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, dir: dir})
           
-          communicate.should_receive(:execute).with("cd #{dir} && #{cmd}")
+          expect(communicate).to receive(:execute).with("cd #{dir} && #{cmd}")
         end
 
         it 'executes the command for the given user' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user})
           
-          communicate.should_receive(:execute).with("sudo su - #{user} -c \"#{cmd}\"")
+          expect(communicate).to receive(:execute).with("sudo su - #{user} -c \"#{cmd}\"")
         end
 
         it 'executes the command for the given user and the given dir' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user, dir: dir})
           
-          communicate.should_receive(:execute).with("sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
+          expect(communicate).to receive(:execute).with("sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
         end
 
         describe 'shows help' do
           let(:parser) {'parser'}
 
           after(:each) do
-            subject.should_not_receive(:with_target_vms)
-            ui.should_receive(:info).with(parser)
+            expect(subject).not_to receive(:with_target_vms)
+            expect(ui).to receive(:info).with(parser)
           end
 
           it 'an empty command' do
