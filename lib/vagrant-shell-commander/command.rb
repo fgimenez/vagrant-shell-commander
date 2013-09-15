@@ -35,23 +35,21 @@ module VagrantShellCommander
         return
       end
       
-      machine.communicate.
-        execute(add_cwd_to_command(cli_options[:values][:cmd], 
-                                   cli_options[:values][:dir],
-                                   cli_options[:values][:user])) do |type, data|
-        env.ui.success("#{machine.name}::")
-        env.ui.info(data, prefix: false, new_line: false)
-      end
+      env.ui.success("#{machine.name}::")
+      machine.action(:ssh_run, 
+                     ssh_run_command: add_options_to_command(cli_options[:values][:cmd], 
+                                                             cli_options[:values][:dir],
+                                                             cli_options[:values][:user]))
     end
 
-    # Adds the change to a working directory to the given command
+    # Adds the options to the given command
     #
     # @param cmd [String] Shell command
     # @param cwd [String] Optional working directory
     # @param cwd [String] Optional executing user
     # @return [String] Command with directory change if cwd is present and optional executing user
     #
-    def add_cwd_to_command(cmd, cwd=nil, user=nil)
+    def add_options_to_command(cmd, cwd=nil, user=nil)
       cmd = "cd #{cwd} && #{cmd}" if cwd
       cmd = "sudo su - #{user} -c \"#{cmd}\"" if user
       cmd

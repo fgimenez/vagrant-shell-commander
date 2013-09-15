@@ -76,43 +76,40 @@ describe VagrantShellCommander::Command do
             and_return(parser: 'parser', values: {cmd: cmd})
 
           machine.stub_chain(:state, :id).and_return(:running)
-          allow(machine).to receive(:communicate).and_return(communicate)
+          allow(ui).to receive(:success)
+          allow(machine).to receive(:action)
         end
 
         it 'executes the given command' do
-          expect(communicate).to receive(:execute).with(cmd)
+          expect(machine).to receive(:action).with(:ssh_run, ssh_run_command: cmd)
         end
 
-        it 'shows the command output along with the machine name' do
-          data = 'data'
-
-          allow(communicate).to receive(:execute).and_yield('type', data)
-
+        it 'shows the machine name' do
           expect(ui).to receive(:success).with("#{machine_name}::")
-          expect(ui).to receive(:info).with(data, 
-                                            prefix: false,
-                                            new_line: false)
         end
 
         it 'executes the command in the given dir' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, dir: dir})
           
-          expect(communicate).to receive(:execute).with("cd #{dir} && #{cmd}")
+          expect(machine).to receive(:action).with(:ssh_run, 
+                                                   ssh_run_command: "cd #{dir} && #{cmd}")
         end
 
         it 'executes the command for the given user' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user})
           
-          expect(communicate).to receive(:execute).with("sudo su - #{user} -c \"#{cmd}\"")
+          expect(machine).to receive(:action).with(:ssh_run,
+                                                   ssh_run_command: "sudo su - #{user} -c \"#{cmd}\"")
         end
 
         it 'executes the command for the given user and the given dir' do
           VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user, dir: dir})
           
-          expect(communicate).to receive(:execute).with("sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
+          expect(machine).to receive(:action).with(:ssh_run, 
+                                                   ssh_run_command: "sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
         end
 
         describe 'shows help' do
