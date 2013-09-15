@@ -16,5 +16,11 @@ module VagrantShellCommander
       require_relative 'vagrant-shell-commander/config'
       Config
     end
+
+    action_hook :sh_hook do |hook|
+      require_relative 'vagrant-shell-commander/action'
+      hook.after(VagrantPlugins::ProviderVirtualBox::Action::ShareFolders, 
+                 VagrantShellCommander::Action)
+    end
   end
 end

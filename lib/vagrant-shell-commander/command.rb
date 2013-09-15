@@ -46,7 +46,7 @@ module VagrantShellCommander
     #
     # @param cmd [String] Shell command
     # @param cwd [String] Optional working directory
-    # @param cwd [String] Optional executing user
+    # @param user [String] Optional executing user
     # @return [String] Command with directory change if cwd is present and optional executing user
     #
     def add_options_to_command(cmd, cwd=nil, user=nil)

@@ -15,17 +15,17 @@ describe VagrantShellCommander::Plugin do
     default_config = described_class.components.configs[:top].to_hash[:"sh"]
     expect(default_config).to be(VagrantShellCommander::Config)
   end
-=begin  
+
   context 'action hooks' do
     let(:hook) {double(append: true, prepend: true)}
 
-    before(:all) do
-      expect(subject).to receive(:action_hook).and_yield hook
-    end
-
     it "should define an action hook for machine_action_up" do
-      expect(hook).to receive(:append).with(VagrantShellCommander::ShAction)
+      hook_proc = described_class.components.action_hooks[:__all_actions__][0]
+      hook = double
+      expect(hook).to receive(:after).with(VagrantPlugins::ProviderVirtualBox::Action::ShareFolders,
+                                           VagrantShellCommander::Action)
+      hook_proc.call(hook)
     end
   end
-=end
+
 end

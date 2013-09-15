@@ -1,19 +1,19 @@
 module VagrantShellCommander
   # Configuration options
   class Config < Vagrant.plugin("2", "config")
-    attr_accessor :after_boot
+    attr_accessor :after_share_folders
 
     # Initialize override, setting config options default values
     # for merging
     def initialize
       super
 
-      @after_boot = UNSET_VALUE
+      @after_share_folders = UNSET_VALUE
     end
 
     # finalize! override, unseting config options
     def finalize!
-      @after_boot = nil if @after_boot == UNSET_VALUE
+      @after_share_folders = nil if @after_share_folders == UNSET_VALUE
     end
   end
 end
