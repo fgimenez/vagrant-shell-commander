@@ -5,12 +5,12 @@
 
 Vagrant plugin for running arbitrary shell commands on guest(s). Executes the given command on all the machines of multinode environments, or just in one of them. It also gives the option to specify a working directory and a user by command line.
 
-It allows you to hook into the boot process, specifying a command to be run once the machine has booted. This can be handy for running init scripts which depends on files located in shared folders, for example.
+It allows you to hook into the boot process, specifying a command to be run once the machine has finished the complete boot process. This can be handy for running init scripts which depends on files located in shared folders, for example.
 
 
 ## Installation
 
-As usual with vagrant plugins:
+Given you have Vagrant 1.1+ installed, as usual with vagrant plugins:
 
     $ vagrant plugin install vagrant-shell-commander
     
@@ -37,6 +37,17 @@ Restrict the machine to run:
 Specify the working directory (remember to quote multiword commands):
 
     $ vagrant sh -c 'ls -al' -d /srv/www
+
+To execute a command once the machine(s) has booted, add this configuration option to the Vagrantfile:
+
+```ruby
+Vagrant.configure("2") do |config|
+  # other...
+
+  config.sh.after_share_folders = "sudo /etc/init.d/myapp start"
+
+end
+```
 
 Get help:
 
