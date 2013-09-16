@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = VagrantShellCommander::VERSION
   spec.authors       = ["Federico Gimenez Nieto"]
   spec.email         = ["federico.gimenez@gmail.com"]
-  spec.description   = %q{This Vagrant plugin allows you to hook a given shell command on the boot process of all (or just one) the machines of your multinode environment.}
-  spec.summary       = %q{Vagrant plugin for hooking arbitrary shell commands on the boot process of guest(s)}
+  spec.description   = %q{Vagrant plugin for executing shell commands on guests machines and hooking them in the boot process}
+  spec.summary       = %q{Some variations to shell command execution on guest(s)}
   spec.homepage      = "https://github.com/fgimenez/vagrant-shell-commander"
   spec.license       = "MIT"
 
