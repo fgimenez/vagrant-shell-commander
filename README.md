@@ -38,6 +38,10 @@ Specify the working directory (remember to quote multiword commands):
 
     $ vagrant sh -c 'ls -al' -d /srv/www
 
+Execute as specific user:
+
+    $ vagrant sh -c 'cap production deploy' -u 'deployer'
+
 Get help:
 
     $ vagrant sh -h
