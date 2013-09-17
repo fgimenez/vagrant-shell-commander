@@ -38,6 +38,10 @@ Specify the working directory (remember to quote multiword commands):
 
     $ vagrant sh -c 'ls -al' -d /srv/www
 
+Get help:
+
+    $ vagrant sh -h
+
 To execute a command once the machine(s) has booted, add this configuration option to the Vagrantfile:
 
 ```ruby
@@ -48,10 +52,6 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-
-Get help:
-
-    $ vagrant sh -h
 
 ## Contributing
 
