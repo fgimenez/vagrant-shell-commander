@@ -26,7 +26,7 @@ execute:
 
 ## Usage
 
-To execute a command on all the machines:
+The command line utility is very similar to the ```vagrant ssh -c``` builtin command, but with multinode support and additional options. To execute a command on all the machines:
 
     $ vagrant sh -c free
 
