@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe VagrantShellCommander::Command do
+describe VagrantPlugins::ShellCommander::Command do
   let(:subject) {described_class.new('2', 'command')}
   let(:argv) {double}
   let(:opts) {{parser: 'parser', values: {cmd: 'cmd'}}}
 
   before(:each) do
-    VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+    VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
       and_return(opts)
 
     subject.stub(:with_target_vms)
@@ -72,7 +72,7 @@ describe VagrantShellCommander::Command do
         let(:communicate) {double(execute: true)}
         
         before(:each) do
-          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+          VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd})
 
           machine.stub_chain(:state, :id).and_return(:running)
@@ -81,7 +81,7 @@ describe VagrantShellCommander::Command do
         end
 
         it 'executes the given command' do
-          expect(machine).to receive(:action).with(:ssh_run, ssh_run_command: cmd)
+          expect(machine).to receive(:action).with(:ssh_run, ssh_run_command: cmd, ssh_opts: {:extra_args=>[]})
         end
 
         it 'shows the machine name' do
@@ -89,27 +89,30 @@ describe VagrantShellCommander::Command do
         end
 
         it 'executes the command in the given dir' do
-          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+          VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, dir: dir})
           
           expect(machine).to receive(:action).with(:ssh_run, 
-                                                   ssh_run_command: "cd #{dir} && #{cmd}")
+                                                   ssh_run_command: "cd #{dir} && #{cmd}",
+                                                   ssh_opts: {:extra_args=>[]})
         end
 
         it 'executes the command for the given user' do
-          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+          VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user})
           
           expect(machine).to receive(:action).with(:ssh_run,
-                                                   ssh_run_command: "sudo su - #{user} -c \"#{cmd}\"")
+                                                   ssh_run_command: "sudo su - #{user} -c \"#{cmd}\"",
+                                                   ssh_opts: {:extra_args=>[]})
         end
 
         it 'executes the command for the given user and the given dir' do
-          VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+          VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
             and_return(parser: 'parser', values: {cmd: cmd, user: user, dir: dir})
           
           expect(machine).to receive(:action).with(:ssh_run, 
-                                                   ssh_run_command: "sudo su - #{user} -c \"cd #{dir} && #{cmd}\"")
+                                                   ssh_run_command: "sudo su - #{user} -c \"cd #{dir} && #{cmd}\"",
+                                                   ssh_opts: {:extra_args=>[]})
         end
 
         describe 'shows help' do
@@ -121,12 +124,12 @@ describe VagrantShellCommander::Command do
           end
 
           it 'an empty command' do
-            VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
               and_return(parser: parser, values: {cmd: '', dir: dir})
           end
 
           it 'non present command' do
-            VagrantShellCommander::OptionManager.stub_chain(:new, :execute).
+            VagrantPlugins::ShellCommander::OptionManager.stub_chain(:new, :execute).
               and_return(parser: parser, values: {user: user})
           end
         end

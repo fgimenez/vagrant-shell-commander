@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VagrantShellCommander::OptionManager do
+describe VagrantPlugins::ShellCommander::OptionManager do
   let(:subject) {described_class.new}
   let(:argv) {double()}
 

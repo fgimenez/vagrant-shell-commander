@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VagrantShellCommander::Config do
+describe VagrantPlugins::ShellCommander::Config do
 
   let(:subject) {described_class.new}
 

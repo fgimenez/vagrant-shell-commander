@@ -1,3 +1,5 @@
-module VagrantShellCommander
-  VERSION = "0.2.0"
+module VagrantPlugins
+  module ShellCommander
+    VERSION = "0.3.0"
+  end
 end

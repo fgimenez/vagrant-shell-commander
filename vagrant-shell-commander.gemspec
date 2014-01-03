@@ -5,7 +5,7 @@ require 'vagrant-shell-commander/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "vagrant-shell-commander"
-  spec.version       = VagrantShellCommander::VERSION
+  spec.version       = VagrantPlugins::ShellCommander::VERSION
   spec.authors       = ["Federico Gimenez Nieto"]
   spec.email         = ["federico.gimenez@gmail.com"]
   spec.description   = %q{Vagrant plugin for executing shell commands on guests machines and hooking them in the boot process}
