@@ -14,15 +14,6 @@ Given you have Vagrant 1.1+ installed, as usual with vagrant plugins:
 
     $ vagrant plugin install vagrant-shell-commander
     
-or with the great Bindler, after adding a plugins.json with, at least:
-
-    {
-      "vagrant-shell-commander"
-    }
-
-execute:
-
-    $ vagrant plugin bundle
 
 ## Usage
 
