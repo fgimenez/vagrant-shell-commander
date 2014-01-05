@@ -48,6 +48,8 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+This can be handy if, for example, you want an application to start on boot and the application's code is in a synced folder.
+
 ## Contributing
 
 1. Fork it
