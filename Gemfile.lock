@@ -1,31 +1,42 @@
 GIT
   remote: git://github.com/mitchellh/vagrant.git
-  revision: 862331fbf02deb7f3c7e00967359e3debd1f9809
+  revision: 6977e93ba98fd19112b1fed74dafb8619f581984
+  tag: v1.5.1
   specs:
-    vagrant (1.5.0.dev)
-      childprocess (~> 0.3.7)
+    vagrant (1.5.1)
+      bundler (~> 1.5.2)
+      childprocess (~> 0.5.0)
       erubis (~> 2.7.0)
       i18n (~> 0.6.0)
-      log4r (~> 1.1.9)
+      listen (~> 2.4.0)
+      log4r (~> 1.1.9, < 1.1.11)
       net-scp (~> 1.1.0)
       net-ssh (>= 2.6.6, < 2.8.0)
+      rb-kqueue (~> 0.2.0)
+      wdm (~> 0.1.0)
 
 PATH
   remote: .
   specs:
-    vagrant-shell-commander (0.3.0)
+    vagrant-shell-commander (0.3.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
     cane (2.6.0)
       parallel
-    childprocess (0.3.9)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
+    childprocess (0.5.1)
       ffi (~> 1.0, >= 1.0.11)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     ffi (1.9.3)
     i18n (0.6.9)
+    listen (2.4.1)
+      celluloid (>= 0.15.2)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     log4r (1.1.10)
     multi_json (1.7.7)
     net-scp (1.1.2)
@@ -33,6 +44,11 @@ GEM
     net-ssh (2.7.0)
     parallel (0.7.1)
     rake (10.1.0)
+    rb-fsevent (0.9.4)
+    rb-inotify (0.9.3)
+      ffi (>= 0.5.0)
+    rb-kqueue (0.2.2)
+      ffi (>= 0.5.0)
     reek (1.3.1)
       ruby2ruby (~> 2.0.2)
       ruby_parser (~> 3.1.1)
@@ -55,6 +71,8 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    timers (1.1.0)
+    wdm (0.1.0)
     yard (0.8.6.2)
 
 PLATFORMS

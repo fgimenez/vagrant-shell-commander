@@ -6,8 +6,9 @@ describe VagrantPlugins::ShellCommander::Action do
   let(:env) {double(:[] => machine)}
   let(:cmd) {'cmd'}
   let(:sh) {double(after_share_folders: cmd)}
-  let(:global_config) {double(sh: sh)}
-  let(:action_env) {{global_config: global_config}}
+  let(:config) {double(sh: sh)}
+  let(:machine_env) {double(config: config)}
+  let(:action_env) {{machine: machine_env}}
   let(:subject) {described_class.new(app, env)}
 
   describe "#call" do
@@ -28,8 +29,9 @@ describe VagrantPlugins::ShellCommander::Action do
       
       it "should not call SSHRun action if after_boot option is nil" do
         sh = double(after_share_folders: nil)
-        global_config = double(sh: sh)
-        action_env = {global_config: global_config}
+        config = double(sh: sh)
+        machine_env = double(config: config)
+        action_env = {machine: machine_env}
         
         expect(machine).not_to receive(:action)
 

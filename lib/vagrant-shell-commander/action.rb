@@ -22,9 +22,9 @@ module VagrantPlugins
       #
       def call(env)
         @app.call(env)
-        unless env[:global_config].sh.after_share_folders.nil?
+        unless env[:machine].config.sh.after_share_folders.nil?
           @machine.action(:ssh_run, 
-                          ssh_run_command: env[:global_config].sh.after_share_folders,
+                          ssh_run_command: env[:machine].config.sh.after_share_folders,
                           ssh_opts: {extra_args: []})
         end
       end

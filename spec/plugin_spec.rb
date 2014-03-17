@@ -6,9 +6,8 @@ describe VagrantPlugins::ShellCommander::Plugin do
   end
 
   it "should define a command of type Command" do
-    default_command = described_class.command.
-      to_hash[:"sh"]
-    expect(default_command).to be(VagrantPlugins::ShellCommander::Command)
+    default_command = described_class.components.commands[:sh]
+    expect(default_command[1]).to eql(primary: true)
   end
 
   it "should define a config of type Config" do
