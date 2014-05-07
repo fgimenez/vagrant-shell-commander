@@ -58,7 +58,3 @@ This can be handy if, for example, you want an application to start on boot and 
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create new Pull Request
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fgimenez/vagrant-shell-commander/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
