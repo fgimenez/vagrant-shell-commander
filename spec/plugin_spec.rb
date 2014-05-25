@@ -18,20 +18,11 @@ describe VagrantPlugins::ShellCommander::Plugin do
   context 'action hooks' do
     let(:hook) {double(append: true, prepend: true)}
 
-    it "should define an action hook for machine_action_up" do
-      hook_proc = described_class.components.action_hooks[:machine_action_up][0]
+    it 'should define an action hook for after share folders' do
+      hook_proc = described_class.components.action_hooks[:__all_actions__][0]
       hook = double
-      expect(hook).to receive(:append).with(VagrantPlugins::ShellCommander::Action)
+      expect(hook).to receive(:after).with(Vagrant::Action::Builtin::Provision, VagrantPlugins::ShellCommander::Action)
       hook_proc.call(hook)
     end
-
-    it "should define an action hook for machine_action_reload" do
-      hook_proc = described_class.components.action_hooks[:machine_action_reload][0]
-      hook = double
-      expect(hook).to receive(:append).with(VagrantPlugins::ShellCommander::Action)
-      hook_proc.call(hook)
-    end
-
   end
-
 end

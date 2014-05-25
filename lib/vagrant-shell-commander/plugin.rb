@@ -13,10 +13,8 @@ module VagrantPlugins
         Config
       end
       
-      %w[up reload].each do |event|
-        action_hook("sh_hook_#{event}".to_sym, "machine_action_#{event}".to_sym) do |hook|
-          hook.append(Action)
-        end
+      action_hook :sh_hook do |hook|
+        hook.after(Vagrant::Action::Builtin::Provision, Action)
       end
     end
   end
