@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cane"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "debugger2"
 end
